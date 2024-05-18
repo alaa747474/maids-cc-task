@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   static ThemeData? theme() {
@@ -10,13 +11,13 @@ class AppTheme {
       dialogTheme:  DialogTheme(backgroundColor: const Color(0xff282A2C),shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16)
       )),
-      appBarTheme: const AppBarTheme(
+      appBarTheme:  AppBarTheme(
           scrolledUnderElevation:0, 
           backgroundColor: Colors.transparent,
           foregroundColor: Colors.white,
           titleTextStyle: TextStyle(
-            fontSize: 22,
-            color: Colors.green,
+            fontSize: 22.sp,
+            color: const Color(0xff5F33E1),
           ),
           centerTitle: true),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -38,9 +39,9 @@ class AppTheme {
           style: TextButton.styleFrom(
               textStyle: TextStyle(fontSize: 12, color: Colors.grey[900]))),
       hintColor: const Color(0xff838383),
-      primaryColor: Colors.green,
-      cardColor: const Color(0xff282A2C),
-      scaffoldBackgroundColor: const Color(0xff1E1E1E),
+      primaryColor: const Color(0xff5F33E1),
+      cardColor: const Color(0xffE0E0E0),
+      scaffoldBackgroundColor:  Colors.white,
       dividerColor: Colors.grey[900],
       shadowColor: Colors.black,
       highlightColor: const Color(0xffF5F5F5),
@@ -61,7 +62,7 @@ class AppTheme {
         fontSize: 24,
       ),
       bodyLarge: TextStyle(
-        color: Colors.green,
+        color: Color(0xff5F33E1),
         fontWeight: FontWeight.normal,
         fontSize: 18,
       ),

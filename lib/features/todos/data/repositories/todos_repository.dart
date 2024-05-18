@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -33,17 +32,12 @@ class TodosRepository implements BaseTodosRepository {
 
   @override
   Future<Either<Failure, PaginatedTodos>> getTodos(int skip) async {
+     await _baseTodosLocalDataSource.openBox();
     if (await InternetConnectionChecker().hasConnection) {
       return _execute(() => _baseTodosRemoteDataSource.getTodos(skip));
     } else {
       try {
-        await _baseTodosLocalDataSource.openBox();
-        log("TODOS LOCAL DATA ${_baseTodosLocalDataSource.getCachedTodos()}");
-        return Right(PaginatedTodos(
-            todos: _baseTodosLocalDataSource.getCachedTodos(),
-            total: 0,
-            skip: 0,
-            limit: 0));
+        return Right(PaginatedTodos(todos: _baseTodosLocalDataSource.getCachedTodos(),));
       } on HiveError catch (e) {
         return Left(LocalDataBaseError(e.message));
       }

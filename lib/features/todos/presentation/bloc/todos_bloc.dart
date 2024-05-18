@@ -24,7 +24,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     final result = await _baseTodosRepository.getTodos(event.skip);
     result.fold((failure) => emit(GetTodosListFailureState(failure.error)),
         (paginatedTodos) {
-      total = paginatedTodos.total;
+      total = paginatedTodos.total??0;
       todos.addAll(paginatedTodos.todos);
       emit(GetTodosListSuccessState(paginatedTodos));
     });

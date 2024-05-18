@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/todos_bloc.dart';
+import 'todo_card.dart';
 
 class TodosList extends StatefulWidget {
   const TodosList({super.key});
@@ -57,9 +58,8 @@ class TodosListState extends State<TodosList> {
           controller: _scrollController,
           itemCount: context.read<TodosBloc>().todos.length,
           itemBuilder: (context, index) {
-            return Text(
-              context.read<TodosBloc>().todos[index].id.toString(),
-              style: const TextStyle(fontSize: 50),
+            return TodoCard(
+             todo: context.read<TodosBloc>().todos[index],
             );
           },
         );

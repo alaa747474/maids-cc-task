@@ -88,7 +88,7 @@ class ApiService {
     Response response = await _request(ApiRequstMethods.post,
         endPoint: endPoint, data: data, useToken: useToken);
     if (response.statusCode == 200) {
-      return response.data;
+      return response;
     } else {
       throw Exception();
     }

@@ -25,6 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   void _login(Login event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     final result = await _authRepository.login(
       LoginParams(
         username: usernameController.text,
@@ -33,9 +34,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     result.fold((failure) => emit(LoginFailuresState(error: failure.error)),
         (user) {
-      AppSecureStorage.instance
-          .storeToken(user.token)
-          .then((value) => emit(LoginSuccessState(user: user)));
+      emit(LoginSuccessState(user: user));
+      AppSecureStorage.instance.storeToken(user.token);
     });
   }
 }
